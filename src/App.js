@@ -1,71 +1,76 @@
-import React from 'react';
-import TodoList from './components/TodoList';
-import TodoForm from './components/TodoForm';
+import React from "react";
+import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
 
 const todo = [
   {
-    name: 'Make Coffee',
+    name: "Make Coffee",
     id: 123,
-    completed: false
+    completed: false,
   },
   {
-    name: 'Check Emails',
+    name: "Check Emails",
     id: 124,
-    completed: false
+    completed: false,
   },
   {
-    name: 'Drive Kids To School',
+    name: "Drive Kids To School",
     id: 125,
-    completed: false
-  }
-]
+    completed: false,
+  },
+];
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: todo
+      todo: todo,
     };
   }
 
-  addItem = itemName => {
+  addItem = (itemName) => {
     this.setState({
       todo: [
-        ...this.state.todo, { name: itemName, id: Date.now(), completed: false }
-      ]
+        ...this.state.todo,
+        { name: itemName, id: Date.now(), completed: false },
+      ],
     });
   };
 
-  toggleCompleted = itemId => {
+  toggleCompleted = (itemId) => {
     this.setState({
-      todo: this.state.todo.map(item => {
+      todo: this.state.todo.map((item) => {
         if (item.id === itemId) {
           return {
             ...item,
-            completed: !item.completed
+            completed: !item.completed,
           };
         }
         return item;
-      })
+      }),
     });
   };
 
   clearCompleted = () => {
     this.setState({
-      todo: this.state.todo.filter(item => {
+      todo: this.state.todo.filter((item) => {
         return !item.completed;
-      })
+      }),
     });
   };
-  
+
   render() {
     return (
-      <div className='App'>
-        <div className='header'>
+      <div className="App">
+        <div className="header">
           <h1>Todo List</h1>
           <TodoForm addItem={this.addItem} />
         </div>
-        <TodoList todo={this.state.todo} toggleCompleted={this.toggleCompleted} clearCompleted={this.clearCompleted} />
+        <TodoList
+          todo={this.state.todo}
+          toggleCompleted={this.toggleCompleted}
+          clearCompleted={this.clearCompleted}
+        />
       </div>
     );
   }
